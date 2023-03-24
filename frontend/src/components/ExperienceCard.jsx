@@ -2,37 +2,37 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { numericalMonthToCharConverter } from "../utils/dateUtil";
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({ data }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box>
           <div>
             <Typography variant="body" sx={{ fontWeight: 600 }}>
-              {experience.company}
+              {data.company}
             </Typography>
           </div>
-          <Typography variant="caption">{experience.title}</Typography>
+          <Typography variant="caption">{data.title}</Typography>
         </Box>
         <Box>
           <div>
             <Typography variant="subtitle2" sx={{ fontWeight: 300 }}>
-              {`${numericalMonthToCharConverter(experience.starts_at.month)},${
-                experience.starts_at.year
+              {`${numericalMonthToCharConverter(data.starts_at.month)},${
+                data.starts_at.year
               } - ${
-                experience?.ends_at
-                  ? `${numericalMonthToCharConverter(
-                      experience.ends_at.month
-                    )},${experience.ends_at.year}`
+                data?.ends_at
+                  ? `${numericalMonthToCharConverter(data.ends_at.month)},${
+                      data.ends_at.year
+                    }`
                   : "Present"
               }`}
             </Typography>
           </div>
-          <Typography variant="caption">{experience.location}</Typography>
+          <Typography variant="caption">{data.location}</Typography>
         </Box>
       </Box>
       <Typography variant="caption">
-        {experience?.description ? experience?.description : ""}
+        {data?.description ? data?.description : ""}
       </Typography>
     </>
   );

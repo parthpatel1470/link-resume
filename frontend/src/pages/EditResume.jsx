@@ -7,6 +7,10 @@ import ExperienceCard from "../components/ExperienceCard";
 import EducationCard from "../components/EducationCard";
 import CertificationCard from "../components/CertificationCard";
 
+import SectionBox from "../components/SectionBox";
+
+import { useState } from "react";
+
 const initData = {
   public_identifier: "parth-patel-1100b9180",
   profile_pic_url:
@@ -373,6 +377,81 @@ const initData = {
 };
 
 const EditResume = () => {
+  const [sections, setSection] = useState([
+    {
+      label: "General",
+      element: (
+        <>
+          <Typography variant="h6">
+            {`${initData.first_name} ${initData.last_name}`}
+          </Typography>
+          <Typography variant="subtitle2" sx={{ fontWeight: 300 }}>
+            {`${initData.city}, ${initData.state}, ${initData.country}`}
+          </Typography>
+          <Typography variant="caption">{initData.summary}</Typography>
+          <hr />
+        </>
+      ),
+    },
+    {
+      label: "Experience",
+      element: (
+        <>
+          <SectionBox
+            title="WORK EXPERIENCE"
+            list={initData.experiences}
+            Component={ExperienceCard}
+          />
+        </>
+      ),
+    },
+    {
+      label: "Education",
+      element: (
+        <>
+          <SectionBox
+            title="EDUCATION"
+            list={initData.education}
+            Component={EducationCard}
+          />
+        </>
+      ),
+    },
+    {
+      label: "Skills",
+      element: (
+        <>
+          <Typography variant="subtitle1">SKIILLS</Typography>
+          <hr />
+          <Typography variant="caption">{initData.skills.join()}</Typography>
+        </>
+      ),
+    },
+    {
+      label: "Certifications",
+      element: (
+        <>
+          <SectionBox
+            title="CERTIFICATIONS"
+            list={initData.certifications}
+            Component={CertificationCard}
+          />
+        </>
+      ),
+    },
+    {
+      label: "Volunteer Work",
+      element: (
+        <>
+          <SectionBox
+            title="VOLUNTEER WORK"
+            list={initData.volunteer_work}
+            Component={ExperienceCard}
+          />
+        </>
+      ),
+    },
+  ]);
   return (
     <>
       <Grid container>
@@ -390,47 +469,9 @@ const EditResume = () => {
             }}
           >
             <Box sx={{ backgroundColor: "white", padding: 2 }}>
-              <Typography variant="h6">
-                {`${initData.first_name} ${initData.last_name}`}
-              </Typography>
-              <Typography variant="subtitle2" sx={{ fontWeight: 300 }}>
-                {`${initData.city}, ${initData.state}, ${initData.country}`}
-              </Typography>
-              <Typography variant="caption">{initData.summary}</Typography>
-              <hr />
-              <Typography variant="subtitle1">WORK EXPERIENCE</Typography>
-              <hr />
-              {initData.experiences.map((experience, index) => {
-                return <ExperienceCard experience={experience} key={index} />;
-              })}
-
-              <Typography variant="subtitle1">EDUCATION</Typography>
-              <hr />
-              {initData.education.map((educationElement, index) => {
-                return (
-                  <EducationCard education={educationElement} key={index} />
-                );
-              })}
-
-              <Typography variant="subtitle1">SKIILLS</Typography>
-              <hr />
-              <Typography variant="caption">
-                {initData.skills.join()}
-              </Typography>
-
-              <Typography variant="subtitle1">CERTIFICATIONS</Typography>
-              <hr />
-              {initData.certifications.map((certifcation, index) => {
-                return (
-                  <CertificationCard certifcation={certifcation} key={index} />
-                );
-              })}
-
-              <Typography variant="subtitle1">VOLUNTEER WORK</Typography>
-              <hr />
-              {initData.volunteer_work.map((volunter, index) => {
-                return <ExperienceCard experience={volunter} key={index} />;
-              })}
+              {sections.map((section, index) => (
+                <div key={index}>{section.element}</div>
+              ))}
             </Box>
           </Box>
         </Grid>
