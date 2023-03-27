@@ -3,43 +3,43 @@ import Typography from "@mui/material/Typography";
 import { numericalMonthToCharConverter } from "../utils/dateUtil";
 import Link from "@mui/material/Link";
 
-const CertificationCard = ({ certifcation }) => {
+const CertificationCard = ({ data }) => {
   return (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Box>
           <div>
             <Typography variant="body" sx={{ fontWeight: 600 }}>
-              {certifcation.url ? (
+              {data.url ? (
                 <Link
-                  href={certifcation.url}
+                  href={data.url}
                   underline="none"
                   color="inherit"
                   variant="body"
                   sx={{ fontWeight: 600 }}
                   target="_blank"
                 >
-                  {certifcation.name}
+                  {data.name}
                 </Link>
               ) : (
-                `${certifcation.name}`
+                `${data.name}`
               )}
             </Typography>
           </div>
-          <Typography variant="caption">{certifcation.authority}</Typography>
+          <Typography variant="caption">{data.authority}</Typography>
         </Box>
         <Box>
           <div>
             <Typography variant="subtitle2" sx={{ fontWeight: 300 }}>
               {`${
-                certifcation?.ends_at
-                  ? `${numericalMonthToCharConverter(
-                      certifcation.ends_at.month
-                    )},${certifcation.ends_at.year}`
-                  : certifcation?.starts_at
-                  ? `${numericalMonthToCharConverter(
-                      certifcation.starts_at.month
-                    )},${certifcation.starts_at.year}`
+                data?.ends_at
+                  ? `${numericalMonthToCharConverter(data.ends_at.month)},${
+                      data.ends_at.year
+                    }`
+                  : data?.starts_at
+                  ? `${numericalMonthToCharConverter(data.starts_at.month)},${
+                      data.starts_at.year
+                    }`
                   : ""
               }`}
             </Typography>
@@ -47,7 +47,7 @@ const CertificationCard = ({ certifcation }) => {
         </Box>
       </Box>
       <Typography variant="caption">
-        {certifcation?.description ? certifcation?.description : ""}
+        {data?.description ? data?.description : ""}
       </Typography>
     </>
   );
